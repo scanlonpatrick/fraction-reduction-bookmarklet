@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <title></title>
+    <meta content="">
+    <style></style>
+    <script type='text/javascript'>
+	//* the following is for test purposes only.  See below for the bookmarklet
+	reduce = function(input){
+	    var n = parseInt(input.split('/')[0]);
+	    var d = parseInt(input.split('/')[1]);
+	    var nf = getFactors(n);
+	    var df = getFactors(d);
+	    
+	    for(var i = 1; i <= nf.length; i++) {
+		if(df.indexOf(nf[i]) > -1) {
+		    return reduce(n/nf[i] + '/' + d/nf[i]);
+		}
+	    }
+	    return input;
+	};
+	
+	getFactors = function(int) {
+	    result = [];
+	    for(var i = 1; i <= int/2; i++){
+		if (int % i === 0) result.push(i);
+	    }
+	    return result;
+	};
+	
+    </script>
+    
+  </head>
+  <body>
+      <input type='text' onFocus='javascript:(function(){ alert(reduce(document.activeElement.value));})()' value="120/200"></input>
+      <input type='text' value="120/200"></input>
+  </body>
+</html>
+
+<!--
+create a bookmark with the following as the URL/Location: 
+
+javascript:(function(){ 
+	reduce = function(input){
+	    var n = parseInt(input.split('/')[0]);
+	    var d = parseInt(input.split('/')[1]);
+	    var nf = getFactors(n);
+	    var df = getFactors(d);
+	    
+	    for(var i = 1; i <= nf.length; i++) {
+		if(df.indexOf(nf[i]) > -1) {
+		    return reduce(n/nf[i] + '/' + d/nf[i]);
+		}
+	    }
+	    return input;
+	};
+	
+	getFactors = function(int) {
+	    result = [];
+	    for(var i = 1; i <= int/2; i++){
+		if (int % i === 0) result.push(i);
+	    }
+	    return result;
+	};
+	
+	document.activeElement.value = reduce(document.activeElement.value);
+})();
+-->
